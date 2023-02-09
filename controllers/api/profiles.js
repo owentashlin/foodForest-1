@@ -7,16 +7,21 @@ module.exports = {
   update,
 };
 
-function index(req, res) {
-  return;
+async function index(req, res) {
+  console.log("index is firing");
+  const result = await Profile.find({ userId: req.params.id });
+  res.json(result);
 }
 
 function create(req, res) {
-  return;
+  console.log("creating profile is firing");
+  Profile.create(req.body, function (err) {
+    console.log(err);
+  });
 }
 
-function deleteProfile(req, res) {
-  return;
+async function deleteProfile(req, res) {
+  await Profile.deleteMany();
 }
 
 function update(req, res) {

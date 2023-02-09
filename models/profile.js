@@ -10,6 +10,13 @@ const profileSchema = new Schema(
       type: String,
       required: true,
     },
+    contactInfo: {
+      type: String,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,

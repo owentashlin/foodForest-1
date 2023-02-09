@@ -3,6 +3,7 @@ const router = express.Router();
 const profilesCtrl = require("../../controllers/api/profiles");
 const ensureLoggedIn = require("../../config/ensureLoggedIn");
 
-router.post("/", profilesCtrl.create);
+router.get("/:id", profilesCtrl.index);
+router.post("/create", profilesCtrl.create);
 
 module.exports = router;

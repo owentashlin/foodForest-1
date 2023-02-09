@@ -3,12 +3,13 @@ const Post = require("../../models/post");
 module.exports = {
   index,
   create,
-  deletePost,
+  deletePosts,
 };
 
 async function index(req, res) {
+  console.log("getting all posts");
   const result = await Post.find();
-  return;
+  res.json(result);
 }
 
 async function create(req, res) {
@@ -18,6 +19,6 @@ async function create(req, res) {
   });
 }
 
-function deletePost(req, res) {
-  return;
+async function deletePosts(req, res) {
+  await Post.deleteMany();
 }
