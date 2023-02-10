@@ -1,11 +1,27 @@
 import { useState, useEffect } from "react";
 import * as profiles from "../../utilities/profiles-service";
-import * as posts from "../../utilities/posts-service";
+import * as postsAPI from "../../utilities/posts-service";
 
-export default function ProfilePage({ userId, profile, posts }) {
+export default function ProfilePage({
+  userId,
+  profile,
+  isChanging,
+  setIsChanging,
+}) {
   //   const [profile, setProfile] = useState(null);
+  const [myPosts, setMyPosts] = useState([]);
 
-  const userPosts = posts.filter((post) => post.userId === userId);
+  useEffect(
+    function () {
+      (async function () {
+        const posts = await postsAPI.getPosts();
+        console.log(posts);
+        const userPosts = posts.filter((post) => post.userId === userId);
+        setMyPosts([...userPosts]);
+      })();
+    },
+    [isChanging]
+  );
 
   const [formData, setFormData] = useState({
     zipCode: "",
@@ -25,7 +41,8 @@ export default function ProfilePage({ userId, profile, posts }) {
   }
 
   async function deletePostHandler(postId) {
-    await posts.deletePost(postId);
+    await postsAPI.deletePost(postId);
+    setIsChanging(true);
   }
 
   return (
@@ -73,8 +90,7 @@ export default function ProfilePage({ userId, profile, posts }) {
             <p>Profile Picture: {profile[0].profilePicture}</p>
           </div>
           <div>
-            {userPosts.map((post, i) => {
-              console.log(userPosts);
+            {myPosts.map((post, i) => {
               return (
                 <>
                   <p key={i}>{post.title}</p>

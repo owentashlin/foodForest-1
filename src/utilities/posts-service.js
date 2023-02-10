@@ -11,5 +11,5 @@ export async function getPosts() {
 }
 
 export async function deletePost(postId) {
-  return sendRequest(`${BASE_URL}/${postId}`);
+  return sendRequest(`${BASE_URL}/${postId}`, "DELETE");
 }

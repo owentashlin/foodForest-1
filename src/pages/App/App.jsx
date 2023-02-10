@@ -8,7 +8,6 @@ import NavBar from "../../components/NavBar/NavBar";
 import CreatePost from "../../components/createPost/CreatePost";
 import * as profiles from "../../utilities/profiles-service";
 import * as posts from "../../utilities/posts-service";
-import PostsList from "../../components/PostsList/PostsList";
 import HomePage from "../../pages/HomePage/HomePage";
 
 export default function App() {
@@ -69,6 +68,7 @@ export default function App() {
               path="/profile"
               element={
                 <ProfilePage
+                  setIsChanging={setIsChanging}
                   posts={nearbyPosts}
                   userId={user._id}
                   profile={profile}

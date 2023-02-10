@@ -25,9 +25,5 @@ async function deletePosts(req, res) {
 }
 
 async function deleteOne(req, res) {
-  await Post.deleteOne(req.params.id);
-}
-
-function something() {
-  return;
+  await Post.findOneAndDelete(req.params.id);
 }
