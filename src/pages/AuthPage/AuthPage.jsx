@@ -1,12 +1,32 @@
-import SignUpForm from '../../components/SignUpForm/SignUpForm'
-import LoginForm from '../../components/LoginForm/LoginForm'
+import { useState } from "react";
+
+import SignUpForm from "../../components/SignUpForm/SignUpForm";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
 export default function AuthPage({ setUser }) {
-    return (
-        <main>
-            <h1>AuthPage</h1>
-            <SignUpForm setUser={setUser} />
-            <LoginForm setUser={setUser} />
-        </main>
-    )
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  function isRegisteredHandler() {
+    setIsRegistered(true);
+  }
+
+  function isNotRegisteredHandler() {
+    setIsRegistered(false);
+  }
+
+  return (
+    <main>
+      {isRegistered ? (
+        <LoginForm
+          isNotRegisteredHandler={isNotRegisteredHandler}
+          setUser={setUser}
+        />
+      ) : (
+        <SignUpForm
+          isRegisteredHandler={isRegisteredHandler}
+          setUser={setUser}
+        />
+      )}
+    </main>
+  );
 }

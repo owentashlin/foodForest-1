@@ -1,0 +1,53 @@
+.separator {
+  height: 15px;
+  background-color: #a7a7b2;
+  margin: 10px 0;
+}
+.navbar-top {
+  margin-top: 10%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar-middle {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.profile-link {
+  width: 25%;
+  margin: 3%;
+}
+
+.update-loc {
+  font-size: 0.8rem;
+}
+
+.create-listing-btn {
+  border-radius: 24px;
+  color: white;
+  background-color: var(--orange);
+  font-weight: 600;
+  padding: 10px 30px;
+}
+
+.navbar-top-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 30%;
+}
+
+.react-icon {
+  width: 30px;
+  height: 30px;
+  color: black;
+}
+
+@media only screen and (max-width: 800px) {
+  .nav-bar {
+    display: flex;
+    flex-direction: column;
+  }
+}

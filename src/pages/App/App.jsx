@@ -5,7 +5,7 @@ import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import NavBar from "../../components/NavBar/NavBar";
-import CreatePost from "../../components/createPost/CreatePost";
+import CreatePost from "../CreatePostPage/CreatePost";
 import * as profiles from "../../utilities/profiles-service";
 import * as posts from "../../utilities/posts-service";
 import HomePage from "../../pages/HomePage/HomePage";
@@ -26,18 +26,15 @@ export default function App() {
       if (user) {
         (async function () {
           const profile = await profiles.getProfile(user._id);
-          setProfile(profile);
-          console.log(profile);
+          setProfile(profile[0]);
+          console.log(user._id);
           const allPosts = await posts.getPosts();
-          console.log(allPosts);
           let nearbyPosts = allPosts.filter((post) => {
             return (
               post.zipCode.slice(0, 2) ===
               profile[0].zipCode.toString().slice(0, 2)
             );
           });
-          console.log(nearbyPosts);
-
           setNearbyPosts(nearbyPosts);
         })();
         (async function () {})();
@@ -48,38 +45,56 @@ export default function App() {
 
   return (
     <main className="App">
-      {user ? (
-        <>
-          <NavBar
-            createPostHandler={createPostHandler}
-            user={user}
-            setUser={setUser}
-          />
-          {isCreatePost && (
-            <CreatePost
-              setIsChanging={setIsChanging}
-              setIsCreatePost={setIsCreatePost}
-              userId={user._id}
-            />
-          )}
-          <Routes>
-            <Route path="/" element={<HomePage posts={nearbyPosts} />} />
-            <Route
-              path="/profile"
-              element={
-                <ProfilePage
-                  setIsChanging={setIsChanging}
-                  posts={nearbyPosts}
-                  userId={user._id}
-                  profile={profile}
+      <div>
+        {user ? (
+          <>
+            {!profile ? (
+              <ProfilePage
+                setProfile={setProfile}
+                setIsChanging={setIsChanging}
+                posts={nearbyPosts}
+                userId={user._id}
+                profile={profile}
+                isChanging={isChanging}
+              />
+            ) : (
+              <>
+                <NavBar
+                  zipcode={profile.zipCode}
+                  createPostHandler={createPostHandler}
+                  user={user}
+                  setUser={setUser}
                 />
-              }
-            />
-          </Routes>
-        </>
-      ) : (
-        <AuthPage setUser={setUser} />
-      )}
+                {isCreatePost && (
+                  <CreatePost
+                    setIsChanging={setIsChanging}
+                    setIsCreatePost={setIsCreatePost}
+                    userId={user._id}
+                  />
+                )}
+                <Routes>
+                  <Route path="/" element={<HomePage posts={nearbyPosts} />} />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProfilePage
+                        setProfile={setProfile}
+                        setIsChanging={setIsChanging}
+                        posts={nearbyPosts}
+                        userId={user._id}
+                        profile={profile}
+                        isChanging={isChanging}
+                      />
+                    }
+                  />
+                </Routes>
+              </>
+            )}
+          </>
+        ) : (
+          <AuthPage user={user} setUser={setUser} />
+        )}
+      </div>
     </main>
   );
 }

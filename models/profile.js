@@ -8,9 +8,17 @@ const profileSchema = new Schema(
     username: { type: String, required: true },
     profilePicture: {
       type: String,
-      required: true,
     },
     contactInfo: {
+      type: String,
+    },
+    farmStandName: {
+      type: String,
+    },
+    farmStandDescription: {
+      type: String,
+    },
+    dateOfBirth: {
       type: String,
     },
     userId: {

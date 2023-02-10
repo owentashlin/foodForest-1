@@ -15,6 +15,11 @@ async function index(req, res) {
 
 function create(req, res) {
   console.log("creating profile is firing");
+  req.body.dateOfBirth = `${req.body.day}/${req.body.month}/${req.body.year}`;
+  console.log(req.body.userId);
+  delete req.body.day;
+  delete req.body.month;
+  delete req.body.year;
   Profile.create(req.body, function (err) {
     console.log(err);
   });

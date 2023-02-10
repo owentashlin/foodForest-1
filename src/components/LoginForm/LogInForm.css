@@ -1,0 +1,42 @@
+.login-input {
+  padding: 12px;
+}
+
+.log-in-title {
+  margin: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  text-align: left;
+}
+
+.remember-me-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  color: black;
+  font-size: 13px;
+  align-items: center;
+}
+
+.remember-me {
+  height: 16px;
+  width: 16px;
+  border: 1.5px solid black;
+  border-radius: 2px;
+  margin-right: 14px;
+}
+
+.login-btn {
+  border-radius: 16px;
+  color: white;
+  background-color: var(--orange);
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 800px) {
+  .login-btn {
+    margin-top: 30px !important;
+    padding: 10px;
+  }
+}

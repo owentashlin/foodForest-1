@@ -1,0 +1,69 @@
+.upload-profile {
+  margin-bottom: 40px;
+}
+
+.dob-question {
+  color: black;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.dob-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dob-inner-container {
+  display: flex;
+  color: black;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.dob-component {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+
+.dob-input {
+  width: 80%;
+  height: 37px;
+  margin-bottom: 10px;
+}
+
+.dob-label {
+  width: 55%;
+  margin-bottom: 5px;
+}
+
+.farmstand-description {
+  resize: none;
+  height: 100px;
+  padding: 10px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-color: #e2d9d1;
+}
+
+.profile-page-input {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.show-contact {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: black;
+  font-size: 0.9rem;
+}
+
+.submit-btn {
+  margin-top: 30px;
+  border-radius: 16px;
+  color: white;
+  background-color: rgb(212, 212, 212);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px;
+}
