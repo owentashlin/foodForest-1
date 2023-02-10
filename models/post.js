@@ -16,12 +16,22 @@ const postSchema = new Schema(
     },
     zipCode: {
       type: String,
-      required: true,
     },
     price: {
       type: String,
     },
     contactInfo: {
+      type: String,
+    },
+    free: { type: String },
+    willingToTrade: { type: String },
+    location: {
+      type: String,
+    },
+    dateRange: {
+      type: String,
+    },
+    timeRange: {
       type: String,
     },
   },

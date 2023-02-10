@@ -16,9 +16,11 @@ export default function App() {
   const [profile, setProfile] = useState(null);
   const [nearbyPosts, setNearbyPosts] = useState([]);
   const [isChanging, setIsChanging] = useState(false);
+  const [isNavBar, setIsNavBar] = useState(true);
 
   function createPostHandler() {
     setIsCreatePost(true);
+    setIsNavBar(false);
   }
 
   useEffect(
@@ -50,6 +52,7 @@ export default function App() {
           <>
             {!profile ? (
               <ProfilePage
+                setIsNavBar={setIsNavBar}
                 setProfile={setProfile}
                 setIsChanging={setIsChanging}
                 posts={nearbyPosts}
@@ -59,21 +62,29 @@ export default function App() {
               />
             ) : (
               <>
-                <NavBar
-                  zipcode={profile.zipCode}
-                  createPostHandler={createPostHandler}
-                  user={user}
-                  setUser={setUser}
-                />
-                {isCreatePost && (
-                  <CreatePost
-                    setIsChanging={setIsChanging}
-                    setIsCreatePost={setIsCreatePost}
-                    userId={user._id}
+                {isNavBar && (
+                  <NavBar
+                    zipcode={profile.zipCode}
+                    createPostHandler={createPostHandler}
+                    user={user}
+                    setUser={setUser}
                   />
                 )}
                 <Routes>
-                  <Route path="/" element={<HomePage posts={nearbyPosts} />} />
+                  <Route
+                    path="/"
+                    element={
+                      <HomePage
+                        profile={profile}
+                        setIsNavBar={setIsNavBar}
+                        setIsChanging={setIsChanging}
+                        setIsCreatePost={setIsCreatePost}
+                        userId={user._id}
+                        isCreatePost={isCreatePost}
+                        posts={nearbyPosts}
+                      />
+                    }
+                  />
                   <Route
                     path="/profile"
                     element={
