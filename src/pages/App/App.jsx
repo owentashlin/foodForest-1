@@ -8,12 +8,15 @@ import NavBar from "../../components/NavBar/NavBar";
 import CreatePost from "../../components/createPost/CreatePost";
 import * as profiles from "../../utilities/profiles-service";
 import * as posts from "../../utilities/posts-service";
+import PostsList from "../../components/PostsList/PostsList";
+import HomePage from "../../pages/HomePage/HomePage";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [isCreatePost, setIsCreatePost] = useState(false);
   const [profile, setProfile] = useState(null);
-  const [allPosts, setAllPosts] = useState([]);
+  const [nearbyPosts, setNearbyPosts] = useState([]);
+  const [isChanging, setIsChanging] = useState(false);
 
   function createPostHandler() {
     setIsCreatePost(true);
@@ -27,16 +30,21 @@ export default function App() {
           setProfile(profile);
           console.log(profile);
           const allPosts = await posts.getPosts();
-          setAllPosts(
-            allPosts.filter((post) => {
-              return post.zipCode.slice(2, 4) === profile.zipCode;
-            })
-          );
+          console.log(allPosts);
+          let nearbyPosts = allPosts.filter((post) => {
+            return (
+              post.zipCode.slice(0, 2) ===
+              profile[0].zipCode.toString().slice(0, 2)
+            );
+          });
+          console.log(nearbyPosts);
+
+          setNearbyPosts(nearbyPosts);
         })();
         (async function () {})();
       }
     },
-    [user]
+    [user, isChanging]
   );
 
   return (
@@ -49,12 +57,23 @@ export default function App() {
             setUser={setUser}
           />
           {isCreatePost && (
-            <CreatePost setIsCreatePost={setIsCreatePost} userId={user._id} />
+            <CreatePost
+              setIsChanging={setIsChanging}
+              setIsCreatePost={setIsCreatePost}
+              userId={user._id}
+            />
           )}
           <Routes>
+            <Route path="/" element={<HomePage posts={nearbyPosts} />} />
             <Route
               path="/profile"
-              element={<ProfilePage userId={user._id} profile={profile} />}
+              element={
+                <ProfilePage
+                  posts={nearbyPosts}
+                  userId={user._id}
+                  profile={profile}
+                />
+              }
             />
           </Routes>
         </>

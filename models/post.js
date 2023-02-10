@@ -18,6 +18,12 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    price: {
+      type: String,
+    },
+    contactInfo: {
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -4,6 +4,7 @@ module.exports = {
   index,
   create,
   deletePosts,
+  deleteOne,
 };
 
 async function index(req, res) {
@@ -21,4 +22,8 @@ async function create(req, res) {
 
 async function deletePosts(req, res) {
   await Post.deleteMany();
+}
+
+async function deleteOne(req, res) {
+  await Post.deleteOne(req.params.id);
 }

@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import * as profiles from "../../utilities/profiles-service";
+import * as posts from "../../utilities/posts-service";
 
-export default function ProfilePage({ userId, profile }) {
+export default function ProfilePage({ userId, profile, posts }) {
   //   const [profile, setProfile] = useState(null);
+
+  const userPosts = posts.filter((post) => post.userId === userId);
 
   const [formData, setFormData] = useState({
     zipCode: "",
@@ -21,16 +24,10 @@ export default function ProfilePage({ userId, profile }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  //   useEffect(
-  //     function () {
-  //       (async function () {
-  //         const profile = await profiles.getProfile(userId);
-  //         setProfile(profile);
-  //         console.log(profile);
-  //       })();
-  //     },
-  //     [userId]
-  //   );
+  async function deletePostHandler(postId) {
+    await posts.deletePost(postId);
+  }
+
   return (
     <>
       {!profile ? (
@@ -68,12 +65,25 @@ export default function ProfilePage({ userId, profile }) {
           </form>
         </div>
       ) : (
-        <div>
-          <p>Username: {profile[0].username}</p>
-          <p>Contact Info: {profile[0].contactInfo}</p>
-          <p>Zipcode: {profile[0].zipCode}</p>
-          <p>Profile Picture: {profile[0].profilePicture}</p>
-        </div>
+        <>
+          <div>
+            <p>Username: {profile[0].username}</p>
+            <p>Contact Info: {profile[0].contactInfo}</p>
+            <p>Zipcode: {profile[0].zipCode}</p>
+            <p>Profile Picture: {profile[0].profilePicture}</p>
+          </div>
+          <div>
+            {userPosts.map((post, i) => {
+              console.log(userPosts);
+              return (
+                <>
+                  <p key={i}>{post.title}</p>
+                  <button onClick={() => deletePostHandler(post._id)}>X</button>
+                </>
+              );
+            })}
+          </div>
+        </>
       )}
     </>
   );
