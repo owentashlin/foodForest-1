@@ -23,11 +23,12 @@ export default function NavBar({ user, setUser, createPostHandler, zipcode }) {
               <Profile />
             </Link>
           </div>
-          <img className="logo-img" width="150px" src={logo} alt="" />
-          <div className="navbar-top-end">
+          <div>
             <Link className="react-icon" to="/">
-              <IoHomeOutline />
+              <img className="logo-img" width="150px" src={logo} alt="" />
             </Link>
+          </div>
+          <div className="navbar-top-end">
             <Link to="" onClick={handleLogOut}>
               <IoMdLogOut className="react-icon" />
             </Link>

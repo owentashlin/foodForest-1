@@ -62,7 +62,7 @@
   margin-top: 30px;
   border-radius: 16px;
   color: white;
-  background-color: rgb(212, 212, 212);
+  background-color: var(--orange);
   font-weight: 600;
   font-size: 14px;
   padding: 10px;
