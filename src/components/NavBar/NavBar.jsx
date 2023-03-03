@@ -4,7 +4,7 @@ import Profile from "../Profile/Profile";
 
 import logo from "../../images/logo.png";
 import { IoMdLogOut } from "react-icons/io";
-import { IoHomeOutline } from "react-icons/io5";
+//import { IoHomeOutline } from "react-icons/io5";
 
 import "./NavBar.css";
 

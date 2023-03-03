@@ -5,7 +5,7 @@ import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import NavBar from "../../components/NavBar/NavBar";
-import CreatePost from "../CreatePostPage/CreatePost";
+//import CreatePost from "../CreatePostPage/CreatePost";
 import * as profiles from "../../utilities/profiles-service";
 import * as posts from "../../utilities/posts-service";
 import HomePage from "../../pages/HomePage/HomePage";
